@@ -80,21 +80,30 @@ def main():
     output_filename = filename[:filename.rfind('.')] + '_out.txt'
     with open(output_filename, 'w', encoding='utf-8') as f:
         print(' 检索结果 '.center(40, '='), file=f)
-        print('\n'.join(certain), file=f)
-        print(file=f)
-        print('未找到的数据:', file=f)
-        print(' '.join(not_found), file=f)
-        print(file=f)
+        if certain:
+            print('\n'.join(certain), file=f)
+            print(file=f)
+
+        if not_found:
+            print('未找到的数据:', file=f)
+            print(' '.join(not_found), file=f)
+            print(file=f)
         if uncertain:
             print('可能没找到的数据:', file=f)
             print(' '.join(uncertain), file=f)
             print(file=f)
-        print('重复出现过的数据:', file=f)
-        print('\n'.join(repeated), file=f)
-        print(file=f)
+        if repeated:
+            print('重复出现过的数据:', file=f)
+            print('\n'.join(repeated), file=f)
+            print(file=f)
+
         if sus:
             print('相关数据:', file=f)
-            print('\n'.join(sus), file=f)
+            for i in sus:
+                print('*' * 20, file=f)
+                print(i, file=f)
+                print('*' * 20, file=f)
+                print(file=f)
 
     print('结果已输出到: {}'.format(output_filename))
 
